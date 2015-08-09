@@ -2,14 +2,6 @@
 ;; Mostly Stuff I've cobbled together from other .emacs files.
 ;; Mike Perrow.
 
-;;(set-face-background 'default "black")
-;;(set-face-foreground 'default "white")
-;;(require 'color-theme-zenburn)
-;;(color-theme-zenburn)
-;;(setq-default frame-background-mode 'dark)
-
-;; (set-scroll-bar-mode 'right)
-
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -30,21 +22,11 @@
 ; Ugly tool bar for babies - give me back those pixels....
 (customize-set-variable 'tool-bar-mode nil)
 
-;; Buffer-switching stuff
-;; I'm currently trying-out ibuffer rather than electric-buffer
-;; (global-set-key "\C-x\C-b" 'electric-buffer-list)
-
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
 (require 'ido)
 (ido-mode t)
-
-; This is really useful. You can define a quick macro (use "C-x (" to start
-; the macro and "C-x )" to finish, then you can use C-o to repeat it over and
-; over. This is much easier than the default "C-x e", because you can hold down
-; C-o to repeat it rapidly
-;;(global-set-key "\C-o" 'call-last-kbd-macro)
 
 ;; where my custom scripts live
 (add-to-list 'load-path "~/emacs/")
@@ -99,16 +81,6 @@
 
 (global-set-key "\C-t\C-o" 'current-buffer-in-other-window)
 
-;; Fast file switching:
-;; Defines a fast way to switch between .cc .h and _test.cc files.
-;; or .js and _unittest.js files
-
-;;(load-file "/home/mikeperrow/code/toggle-file-suffix.el")
-;;(global-set-key "\C-t\C-t" 'toggle-file-suffix)
-
-;;(autoload 'js2-mode (format "js2-emacs%d" emacs-major-version) nil t)
-;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-
 ;; Highlight matching parens
 (show-paren-mode t)
 
@@ -145,11 +117,6 @@
 (defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/"))
 (setq backup-directory-alist (list (cons "." backup-dir)))
 
-;; I used to like purple functions
-;;(set-face-attribute 'font-lock-function-name-face nil :weight 'normal
-;;		                                      :foreground "purple"
-;;						      :italic t)
-
 ;; git is awesome, but I don't want to be stating files on NFS just to open a file...
 (defun vc-git-registered (file) nil)
 
@@ -160,28 +127,11 @@
              (setq truncate-partial-width-windows nil))
 )
 
-;; Zen Coding
-;; http://www.emacswiki.org/emacs/ZenCoding
-;;(require 'zencoding-mode)  ;; it's in ~/emacs/
-;;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
-;;(global-set-key "\M-\r" 'zencoding-expand-line)
-
-;; yasnippet
-;; http://code.google.com/p/yasnippet/
-;;(add-to-list 'load-path "~/emacs/yasnippet-0.6.1c")
-;;(require 'yasnippet)
-;;(yas/initialize)
-;;(yas/load-directory "~/emacs/yasnippet-0.6.1c/snippets")
-
-;; review comments in git5 clients?
-(global-set-key (kbd "C-x g c")
-								(lambda () (interactive) (compile "git5 comments -q")))
-
 ; Get window splitting working sensibly
 (setq split-height-threshold nil)
 (setq split-width-threshold nil)
 
-; TRAMP is awesome. Set it up so my interactive login script at work doesn't kill it.
+; TRAMP is awesome. Set it up so interactive login scripts don't kill it.
 (setq tramp-default-method "scpx")
 
 ;; Rainbox delimiters. Should be in my load path (It's in dropbox).
@@ -190,16 +140,7 @@
 ;; word count tools
 (require 'wc)
 
-;; coffeescript support
-;;(setq-default coffee-tab-width 2)
-;;(require 'coffee-mode)
-
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
-
-;; 2-space indent for js/c code
-;;(setq c-basic-indent 2)
-;;(setq js-indent-level 2)
-;;(setq indent-tabs-mode nil)
 
 (server-start)
