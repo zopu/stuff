@@ -143,4 +143,6 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
 
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+
 (server-start)
